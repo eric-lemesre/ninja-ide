@@ -19,12 +19,16 @@ from __future__ import unicode_literals
 
 import time
 
-from PyQt4.QtGui import QWidget
-from PyQt4.QtGui import QVBoxLayout
-from PyQt4.QtCore import Qt
-from PyQt4.QtCore import QUrl
-from PyQt4.QtCore import SIGNAL
-from PyQt4.QtWebKit import QWebView
+from PyQt5.QtWidgets import (
+    QWidget,
+    QVBoxLayout
+)
+from PyQt5.QtCore import (
+    Qt,
+    QUrl,
+    pyqtSignal
+)
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 from ninja_ide.core.file_handling import file_manager
 
@@ -46,7 +50,7 @@ class BrowserWidget(QWidget):
         self._process = process
         vbox = QVBoxLayout(self)
         #Web Frame
-        self.webFrame = QWebView(self)
+        self.webFrame = QWebEngineView(self)
         self.webFrame.setAcceptDrops(False)
 
         self.webFrame.load(QUrl(url))
@@ -64,7 +68,7 @@ class BrowserWidget(QWidget):
 
     def start_page_operations(self, url):
         opt = file_manager.get_basename(url.toString())
-        self.emit(SIGNAL(opt))
+        self.emit(pyqtSignal(opt))
 
     def shutdown_pydoc(self):
         if self._process is not None:

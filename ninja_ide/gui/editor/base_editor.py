@@ -15,17 +15,21 @@
 # You should have received a copy of the GNU General Public License
 # along with NINJA-IDE; If not, see <http://www.gnu.org/licenses/>.
 
-from PyQt5.QtWidgets import QPlainTextEdit
-# from PyQt5.QtWidgets import QApplication
-# from PyQt5.QtWidgets import QVBoxLayout
-from PyQt5.QtWidgets import QAbstractSlider
-# from PyQt5.QtWidgets import QListView
-# from PyQt5.QtWidgets import QFrame
+from PyQt5.QtWidgets import (
+    QPlainTextEdit,
+    # QApplication,
+    # QVBoxLayout,
+    QAbstractSlider,
+    # QListView,
+    # QFrame,
+)
 
-from PyQt5.QtGui import QTextBlockUserData
-from PyQt5.QtGui import QTextDocument
-from PyQt5.QtGui import QColor
-from PyQt5.QtGui import QTextCursor
+from PyQt5.QtGui import (
+    QTextBlockUserData,
+    QTextDocument,
+    QColor,
+    QTextCursor
+)
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtCore import pyqtSignal

@@ -602,14 +602,14 @@ class _StatusBar(QWidget):
         # Not Configurable Shortcuts
         shortEscStatus = QShortcut(QKeySequence(Qt.Key_Escape), self)
 
-        self.connect(shortEscStatus, SIGNAL("activated()"), self.hide_status)
-        self.connect(self._searchWidget._btnClose, SIGNAL("clicked()"),
+        self.connect(shortEscStatus, pyqtSignal("activated()"), self.hide_status)
+        self.connect(self._searchWidget._btnClose, pyqtSignal("clicked()"),
                      self.hide_status)
-        self.connect(self._replaceWidget._btnCloseReplace, SIGNAL("clicked()"),
+        self.connect(self._replaceWidget._btnCloseReplace, pyqtSignal("clicked()"),
                      lambda: self._replaceWidget.setVisible(False))
-        self.connect(self._fileSystemOpener.btnClose, SIGNAL("clicked()"),
+        self.connect(self._fileSystemOpener.btnClose, pyqtSignal("clicked()"),
                      self.hide_status)
-        self.connect(self._fileSystemOpener, SIGNAL("requestHide()"),
+        self.connect(self._fileSystemOpener, pyqtSignal("requestHide()"),
                      self.hide_status)
 
         # Register signals connections
@@ -761,15 +761,15 @@ class SearchWidget(QWidget):
         self.index = 0
         self._line.counter.update_count(self.index, self.totalMatches)
 
-        # self.connect(self._btnFind, SIGNAL("clicked()"),
+        # self.connect(self._btnFind, pyqtSignal("clicked()"),
         #             self.find)
-        self.connect(self.btnNext, SIGNAL("clicked()"),
+        self.connect(self.btnNext, pyqtSignal("clicked()"),
                      self.find_next)
-        self.connect(self.btnPrevious, SIGNAL("clicked()"),
+        self.connect(self.btnPrevious, pyqtSignal("clicked()"),
                      self.find_previous)
-        self.connect(self._checkSensitive, SIGNAL("stateChanged(int)"),
+        self.connect(self._checkSensitive, pyqtSignal("stateChanged(int)"),
                      self._states_changed)
-        self.connect(self._checkWholeWord, SIGNAL("stateChanged(int)"),
+        self.connect(self._checkWholeWord, pyqtSignal("stateChanged(int)"),
                      self._states_changed)
 
         IDE.register_service('status_search', self)
@@ -874,11 +874,11 @@ class ReplaceWidget(QWidget):
         hReplace.addWidget(self._btnReplaceAll)
         hReplace.addWidget(self._btnReplaceSelection)
 
-        self.connect(self._btnReplace, SIGNAL("clicked()"),
+        self.connect(self._btnReplace, pyqtSignal("clicked()"),
                      self.replace)
-        self.connect(self._btnReplaceAll, SIGNAL("clicked()"),
+        self.connect(self._btnReplaceAll, pyqtSignal("clicked()"),
                      self.replace_all)
-        self.connect(self._btnReplaceSelection, SIGNAL("clicked()"),
+        self.connect(self._btnReplaceSelection, pyqtSignal("clicked()"),
                      self.replace_selected)
 
     def replace(self):
@@ -968,9 +968,9 @@ class FileSystemOpener(QWidget):
         hbox.addWidget(self.pathLine)
         hbox.addWidget(self.btnOpen)
 
-        self.connect(self.pathLine, SIGNAL("returnPressed()"),
+        self.connect(self.pathLine, pyqtSignal("returnPressed()"),
                      self._open_file)
-        self.connect(self.btnOpen, SIGNAL("clicked()"),
+        self.connect(self.btnOpen, pyqtSignal("clicked()"),
                      self._open_file)
 
     def _open_file(self):
@@ -979,7 +979,7 @@ class FileSystemOpener(QWidget):
         main_container = IDE.get_service("main_container")
         if main_container:
             main_container.open_file(path)
-            self.emit(SIGNAL("requestHide()"))
+            self.emit(pyqtSignal("requestHide()"))
 
     def showEvent(self, event):
         """Show the FileSystemOpener widget and select all the text."""

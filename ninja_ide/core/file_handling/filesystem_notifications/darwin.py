@@ -18,7 +18,7 @@
 from __future__ import absolute_import
 
 #import fsevents
-#from PyQt4.QtCore import SIGNAL
+#from PyQt5.QtCore import pyqtSignal
 
 from ninja_ide.tools.logger import NinjaLogger
 logger = NinjaLogger('ninja_ide.core.file_handling.filesystem_notifications.darwin')
@@ -92,4 +92,4 @@ class NinjaFileSystemWatcher(base_watcher.BaseWatcher):
         #if oper is None:
             #return
         #path = event.name
-        #self.emit(SIGNAL("fileChanged(int, QString)"), oper, path)
+        #self.emit(pyqtSignal("fileChanged(int, QString)"), oper, path)

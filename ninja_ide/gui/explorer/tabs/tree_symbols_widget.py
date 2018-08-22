@@ -79,11 +79,11 @@ class TreeSymbolsWidget(QDialog):
             self._menu_context_tree)
         # self.connect(
         #    self,
-        #    SIGNAL("customContextMenuRequested(const QPoint &)"),
+        #    pyqtSignal("customContextMenuRequested(const QPoint &)"),
         #    self._menu_context_tree)
-        # self.connect(self, SIGNAL("itemCollapsed(QTreeWidgetItem *)"),
+        # self.connect(self, pyqtSignal("itemCollapsed(QTreeWidgetItem *)"),
         #             self._item_collapsed)
-        # self.connect(self, SIGNAL("itemExpanded(QTreeWidgetItem *)"),
+        # self.connect(self, pyqtSignal("itemExpanded(QTreeWidgetItem *)"),
         #             self._item_expanded)
 
         IDE.register_service('symbols_explorer', self)
@@ -113,16 +113,16 @@ class TreeSymbolsWidget(QDialog):
         menu.addSeparator()
         # save_state = menu.addAction(self.tr("Save State"))
 
-        # self.connect(f_all, SIGNAL("triggered()"),
+        # self.connect(f_all, pyqtSignal("triggered()"),
         #             lambda: self.tree.collapseAll())
-        # self.connect(u_all, SIGNAL("triggered()"),
+        # self.connect(u_all, pyqtSignal("triggered()"),
         #             lambda: self.tree.expandAll())
-        # self.connect(u_class, SIGNAL("triggered()"), self._unfold_class)
-        # self.connect(u_class_method, SIGNAL("triggered()"),
+        # self.connect(u_class, pyqtSignal("triggered()"), self._unfold_class)
+        # self.connect(u_class_method, pyqtSignal("triggered()"),
         #             self._unfold_class_method)
-        # self.connect(u_class_attr, SIGNAL("triggered()"),
+        # self.connect(u_class_attr, pyqtSignal("triggered()"),
         #              self._unfold_class_attribute)
-        # self.connect(save_state, SIGNAL("triggered()"),
+        # self.connect(save_state, pyqtSignal("triggered()"),
         #    self._save_symbols_state)
 
         menu.exec_(QCursor.pos())
@@ -341,7 +341,7 @@ class TreeSymbolsWidget(QDialog):
         """On Close event handling"""
 
         self.dockWidget.emit(self)
-        # self.emit(SIGNAL("dockWidget(PyQt_PyObject)"), self)
+        # self.emit(pyqtSignal("dockWidget(PyQt_PyObject)"), self)
         event.ignore()
 
 

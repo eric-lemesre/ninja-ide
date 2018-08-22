@@ -401,7 +401,7 @@ from PyQt5.QtCore import (
     pyqtSignal,
     Qt
 )
-# from PyQt4.QtWebKit import QWebPage
+# from PyQt5.QtWebKit import QWebPage
 
 from ninja_ide.core import settings
 from ninja_ide.core.file_handling import file_manager

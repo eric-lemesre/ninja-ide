@@ -72,7 +72,7 @@ try:
 except:
     from pip.utils import get_installed_distributions
 #lint:enable
-from PyQt4.QtCore import QObject, SIGNAL, QThread
+from PyQt5.QtCore import QObject, pyqtSignal, QThread
 
 
 PLUGIN_QUERY = {"keywords": "ninja_ide plugin"}
@@ -81,7 +81,7 @@ PLUGIN_QUERY = {"keywords": "ninja_ide plugin"}
 class AsyncRunner(QThread):
     """
     Run in a QThread the given callable.
-    SIGNALS:
+    pyqtSignalS:
     @threadEnded()
     @threadFailed(const QString&)
     @threadFinished(PyQt_PyObject)
@@ -95,21 +95,21 @@ class AsyncRunner(QThread):
         self.__iserror = False
         self.__errmsg = ""
         super(AsyncRunner, self).__init__()
-        self.connect(self, SIGNAL("threadEnded()"), self._success_finish)
-        self.connect(self, SIGNAL("threadFailed(const QString&)"),
+        self.connect(self, pyqtSignal("threadEnded()"), self._success_finish)
+        self.connect(self, pyqtSignal("threadFailed(const QString&)"),
                      self._fail_finish)
 
     def _success_finish(self):
         self.__finished = True
         self.wait()
-        self.emit(SIGNAL("threadFinished(PyQt_PyObject)"), self.status)
+        self.emit(pyqtSignal("threadFinished(PyQt_PyObject)"), self.status)
 
     def _fail_finish(self, errmsg):
         self.__finished = True
         self.__iserror = True
         self.__errmsg = errmsg
         self.wait()
-        self.emit(SIGNAL("threadFinished(PyQt_PyObject)"), self.status)
+        self.emit(pyqtSignal("threadFinished(PyQt_PyObject)"), self.status)
 
     def status(self):
         """
@@ -135,13 +135,13 @@ class AsyncRunner(QThread):
     def run(self):
         try:
             self.__runable(*self.__args, **self.__kwargs)
-            self.emit(SIGNAL("threadEnded()"))
+            self.emit(pyqtSignal("threadEnded()"))
         except Exception as e:
             if hasattr(e, "message"):
                 errmsg = e.message
             else:  # Python 3
                 errmsg = str(e)
-            self.emit(SIGNAL("threadFailed(QString)"), errmsg)
+            self.emit(pyqtSignal("threadFailed(QString)"), errmsg)
 
 
 def make_async(func):
@@ -156,7 +156,7 @@ def make_async(func):
 
 class NenvEggSearcher(QObject):
     """
-    SIGNALS:
+    pyqtSignalS:
     @searchTriggered()
     @searchCompleted(PyQt_PyObject)
     """
@@ -175,9 +175,9 @@ class NenvEggSearcher(QObject):
 
     @make_async
     def do_search(self):
-        self.emit(SIGNAL("searchTriggered()"))
+        self.emit(pyqtSignal("searchTriggered()"))
         plugins_found = self.pypi.search(PLUGIN_QUERY, "and")
-        self.emit(SIGNAL("searchCompleted(PyQt_PyObject)"),
+        self.emit(pyqtSignal("searchCompleted(PyQt_PyObject)"),
                   self.__iterate_results(plugins_found))
 
     def __iterate_results(self, result_list):
@@ -201,7 +201,7 @@ class PluginMetadata(QObject):
     holding the data from a result (name, summary, version).
     To obtain full data call inflate.
 
-    SIGNALS:
+    pyqtSignalS:
     @willInflatePluginMetadata()
     @pluginMetadataInflated()
     @pluginInstalled(PyQt_PyObject)
@@ -267,11 +267,11 @@ class PluginMetadata(QObject):
         Fill extra attributes of a shallow object
         """
         if self.shallow:
-            self.emit(SIGNAL("willInflatePluginMetadata()"))
+            self.emit(pyqtSignal("willInflatePluginMetadata()"))
             rdata = self.pypi.release_data(self.name, self.version)
             for each_arg, each_value in rdata.items():
                 setattr(self, each_arg, each_value)
-            self.emit(SIGNAL("pluginMetadataInflated(PyQt_PyObject)"), self)
+            self.emit(pyqtSignal("pluginMetadataInflated(PyQt_PyObject)"), self)
             self.shallow = False
 
     @make_async
@@ -283,17 +283,17 @@ class PluginMetadata(QObject):
         """
         pkg_string = "%s==%s" % (self.name, self.version)
         pipmain(["install", "-q", pkg_string])
-        self.emit(SIGNAL("pluginInstalled(PyQt_PyObject)"), self)
+        self.emit(pyqtSignal("pluginInstalled(PyQt_PyObject)"), self)
 
     @make_async
     def reinstall(self):
         pipmain(["install", "-q", "--force-reinstall", self.name])
-        self.emit(SIGNAL("pluginInstalled(PyQt_PyObject)"), self)
+        self.emit(pyqtSignal("pluginInstalled(PyQt_PyObject)"), self)
 
     @make_async
     def upgrade(self):
         pipmain(["install", "-q", "--ugprade", self.name])
-        self.emit(SIGNAL("pluginInstalled(PyQt_PyObject)"), self)
+        self.emit(pyqtSignal("pluginInstalled(PyQt_PyObject)"), self)
 
     @make_async
     def remove(self):

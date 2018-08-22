@@ -84,7 +84,7 @@ class IDE(QMainWindow):
     the widgets, and let them just consume the 'actions' they need."""
 
 ###############################################################################
-# SIGNALS
+# pyqtSignalS
 ###############################################################################
     goingDown = pyqtSignal()
     filesAndProjectsLoaded = pyqtSignal()
@@ -353,7 +353,7 @@ class IDE(QMainWindow):
 
                     # print("Falta conectar {} a {}".format(signal_name,
                     #                                      slot.__name__))
-                    # self.connect(target, SIGNAL(signal_name), slot)
+                    # self.connect(target, pyqtSignal(signal_name), slot)
                     # connection['connected'] = True
 
     @classmethod
@@ -578,7 +578,7 @@ class IDE(QMainWindow):
     # def _set_editors_project_data(self):
     #     self.__project_to_open -= 1
     #     if self.__project_to_open == 0:
-    #         self.disconnect(self.explorer, SIGNAL("projectOpened(QString)"),
+    #         self.disconnect(self.explorer, pyqtSignal("projectOpened(QString)"),
     #             self._set_editors_project_data)
     #         self.mainContainer.update_editor_project()
 
@@ -688,7 +688,7 @@ class IDE(QMainWindow):
         # if hasattr(callback, "__call__"):
         #    callback()
         # print(signal_name, value)
-        # self.emit(SIGNAL(signal_name), value)
+        # self.emit(pyqtSignal(signal_name), value)
         # print("Falta emitir {}".format(signal_name))
 
     def save_settings(self):

@@ -24,10 +24,10 @@ from __future__ import unicode_literals
 
 import re
 
-from PyQt4.QtGui import (
+from PyQt5.QtWidgets import (
     QSyntaxHighlighter,
     QColor, QTextCharFormat, QTextBlockUserData, QFont, QBrush, QTextFormat)
-from PyQt4.QtCore import SIGNAL
+from PyQt5.QtCore import pyqtSignal
 
 from ninja_ide import resources
 from ninja_ide.core import settings
@@ -290,7 +290,7 @@ class SyntaxHighlighter(QSyntaxHighlighter):
 
         if self._neditable:
             self.connect(self._neditable,
-                SIGNAL("checkersUpdated(PyQt_PyObject)"),
+                pyqtSignal("checkersUpdated(PyQt_PyObject)"),
                 self._rehighlight_checkers)
 
         if isinstance(partition_scanner, (list, tuple)):

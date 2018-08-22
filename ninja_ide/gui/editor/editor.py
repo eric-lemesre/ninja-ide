@@ -35,7 +35,7 @@ from PyQt5.QtCore import QTimer
 from PyQt5.QtCore import QEvent
 
 from ninja_ide import resources
-from ninja_ide.tools import utils
+from ninja_ide.utils import utils
 from ninja_ide.core import settings
 from ninja_ide.gui.ide import IDE
 from ninja_ide.gui.editor import indenter

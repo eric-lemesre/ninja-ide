@@ -96,11 +96,11 @@ class GoToDefinition(QObject):
         super(GoToDefinition, self).__init__()
         self._thread = LocateSymbolsThread()
         self._thread.finished.connect(self._load_results)
-        # self.connect(self._thread, SIGNAL("finished()"), self._load_results)
+        # self.connect(self._thread, pyqtSignal("finished()"), self._load_results)
         self._thread.finished.connect(self._cleanup)
-        # self.connect(self._thread, SIGNAL("finished()"), self._cleanup)
+        # self.connect(self._thread, pyqtSignal("finished()"), self._cleanup)
         self._thread.terminated.connect(self._cleanup)
-        # self.connect(self._thread, SIGNAL("terminated()"), self._cleanup)
+        # self.connect(self._thread, pyqtSignal("terminated()"), self._cleanup)
 
     def _cleanup(self):
         self._thread.wait()

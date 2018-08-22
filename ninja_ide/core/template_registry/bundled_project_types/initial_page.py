@@ -33,7 +33,7 @@ from PyQt5.QtWidgets import (
 )
 from ninja_ide.core.file_handling import file_manager
 from ninja_ide import translations
-from ninja_ide.tools import utils
+from ninja_ide.utils import utils
 
 # http://opensource.org/licenses/alphabetical
 LICENSES = (

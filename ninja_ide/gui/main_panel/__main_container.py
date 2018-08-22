@@ -46,7 +46,7 @@ from ninja_ide.gui.editor import editor
 from ninja_ide.gui.editor import helpers
 from ninja_ide.gui.main_panel import actions
 from ninja_ide.gui.main_panel import main_selector
-# from ninja_ide.gui.main_panel import browser_widget
+from ninja_ide.gui.main_panel import browser_widget
 from ninja_ide.gui.main_panel import start_page
 from ninja_ide.gui.main_panel import files_handler
 from ninja_ide.gui.main_panel import add_file_folder

@@ -28,7 +28,7 @@ from PyQt5.QtCore import pyqtSignal
 from ninja_ide import translations
 # FIXME: Obtain these form a getter
 from ninja_ide.core import settings
-from ninja_ide.tools.utils import SignalFlowControl
+from ninja_ide.utils.utils import SignalFlowControl
 from .file_manager import NinjaIOException, NinjaNoFileNameException, \
     get_file_encoding, get_basename, get_file_extension
 

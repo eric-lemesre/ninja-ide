@@ -22,27 +22,29 @@ import os
 import sys
 from getpass import getuser
 
-from PyQt5.QtWidgets import QWidget
-from PyQt5.QtWidgets import QAction
-from PyQt5.QtWidgets import QTabWidget
-from PyQt5.QtWidgets import QVBoxLayout
-from PyQt5.QtWidgets import QDialogButtonBox
-from PyQt5.QtWidgets import QDialog
-from PyQt5.QtWidgets import QGridLayout
-from PyQt5.QtWidgets import QLineEdit
-from PyQt5.QtWidgets import QLabel
-from PyQt5.QtWidgets import QCompleter
-from PyQt5.QtWidgets import QDirModel
-from PyQt5.QtWidgets import QPlainTextEdit
-from PyQt5.QtWidgets import QComboBox
-from PyQt5.QtWidgets import QFileDialog
-from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtWidgets import QSpinBox
+from PyQt5.QtWidgets import (
+    QWidget,
+    QAction,
+    QTabWidget,
+    QVBoxLayout,
+    QDialogButtonBox,
+    QDialog,
+    QGridLayout,
+    QLineEdit,
+    QLabel,
+    QCompleter,
+    QDirModel,
+    QPlainTextEdit,
+    QComboBox,
+    QFileDialog,
+    QMessageBox,
+    QSpinBox
+)
 from PyQt5.QtCore import Qt
 
 from ninja_ide import translations
 from ninja_ide.core.file_handling import file_manager
-from ninja_ide.tools import utils
+from ninja_ide.utils import utils
 from ninja_ide.gui.ide import IDE
 
 from ninja_ide.tools.logger import NinjaLogger
@@ -396,14 +398,14 @@ class ProjectExecution(QWidget):
         choose_interpreter.triggered.connect(self._load_python_path)
         choose_pre_exec.triggered.connect(self.select_pre_exec_script)
         choose_post_exec.triggered.connect(self.select_post_exec_script)
-        # self.connect(self.btnBrowse, SIGNAL("clicked()"), self.select_file)
-        # self.connect(self.btnPythonPath, SIGNAL("clicked()"),
+        # self.connect(self.btnBrowse, pyqtSignal("clicked()"), self.select_file)
+        # self.connect(self.btnPythonPath, pyqtSignal("clicked()"),
         #             self._load_python_path)
-        # self.connect(self.btnVenvPath, SIGNAL("clicked()"),
+        # self.connect(self.btnVenvPath, pyqtSignal("clicked()"),
         #             self._load_python_venv)
-        # self.connect(self.btnPreExec, SIGNAL("clicked()"),
+        # self.connect(self.btnPreExec, pyqtSignal("clicked()"),
         #             self.select_pre_exec_script)
-        # self.connect(self.btnPostExec, SIGNAL("clicked()"),
+        # self.connect(self.btnPostExec, pyqtSignal("clicked()"),
         #             self.select_post_exec_script)
 
     @property

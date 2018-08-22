@@ -602,7 +602,7 @@ class ThreadProjectExplore(QThread):
                                                 [None, None])[1] is not None):
             folderStructure[self._folder_path][1].sort()
             values = (self._folder_path, self._item, folderStructure)
-            self.emit(SIGNAL("folderDataRefreshed(PyQt_PyObject)"), values)
+            self.emit(pyqtSignal("folderDataRefreshed(PyQt_PyObject)"), values)
 
     def _thread_open_project(self):
         try:
@@ -615,10 +615,10 @@ class ThreadProjectExplore(QThread):
             else:
                 structure = file_manager.open_project(self._folder_path)
 
-            self.emit(SIGNAL("folderDataAcquired(PyQt_PyObject)"),
+            self.emit(pyqtSignal("folderDataAcquired(PyQt_PyObject)"),
                 (self._folder_path, structure))
         except:
-            self.emit(SIGNAL("folderDataAcquired(PyQt_PyObject)"),
+            self.emit(pyqtSignal("folderDataAcquired(PyQt_PyObject)"),
                 (self._folder_path, None))
 
 
@@ -845,7 +845,7 @@ class LineEditTabCompleter(QLineEdit):
         else:
             actionCompletion = QAction(
                 self.tr("Set completion type to: Inline Completion"), self)
-        self.connect(actionCompletion, SIGNAL("triggered()"),
+        self.connect(actionCompletion, pyqtSignal("triggered()"),
             self.change_completion_type)
         popup_menu.insertSeparator(popup_menu.actions()[0])
         popup_menu.insertAction(popup_menu.actions()[0], actionCompletion)

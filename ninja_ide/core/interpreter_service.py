@@ -26,7 +26,7 @@ from PyQt5.QtCore import QThread
 from PyQt5.QtCore import pyqtSignal
 
 from ninja_ide.tools.logger import NinjaLogger
-from ninja_ide.tools import utils
+from ninja_ide.utils import utils
 from ninja_ide.core import settings
 
 logger = NinjaLogger(__name__)

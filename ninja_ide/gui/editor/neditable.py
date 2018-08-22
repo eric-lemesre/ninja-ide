@@ -27,7 +27,7 @@ from ninja_ide.core import settings
 
 class NEditable(QObject):
     """
-    SIGNALS:
+    pyqtSignalS:
     @checkersUpdated(PyQt_PyObject)
     @askForSaveFileClosing(PyQt_PyObject)
     @fileClosing(PyQt_PyObject)

@@ -20,8 +20,8 @@ from __future__ import unicode_literals
 import os
 import subprocess
 
-from PyQt4.QtCore import QThread
-from PyQt4.QtCore import SIGNAL
+from PyQt5.QtCore import QThread
+from PyQt5.QtCore import pyqtSignal
 
 from ninja_ide import resources
 from ninja_ide.core.file_handling import file_manager
@@ -54,9 +54,9 @@ class MigrationTo3(QThread):
         ninjaide = IDE.get_service('ide')
         self.connect(
             ninjaide,
-            SIGNAL("ns_preferences_editor_showMigrationTips(PyQt_PyObject)"),
+            pyqtSignal("ns_preferences_editor_showMigrationTips(PyQt_PyObject)"),
             lambda: remove_migration_checker())
-        self.connect(self, SIGNAL("checkerCompleted()"), self.refresh_display)
+        self.connect(self, pyqtSignal("checkerCompleted()"), self.refresh_display)
 
     def run_checks(self):
         if not self.isRunning() and settings.VALID_2TO3:
@@ -109,7 +109,7 @@ class MigrationTo3(QThread):
 
                 if line.startswith('@@'):
                     lineno = int(line[line.index('-') + 1:line.index(',')]) - 1
-            self.emit(SIGNAL("checkerCompleted()"))
+            self.emit(pyqtSignal("checkerCompleted()"))
 
     def refresh_display(self):
         tab_migration = IDE.get_service('tab_migration')

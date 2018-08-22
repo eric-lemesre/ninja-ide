@@ -54,7 +54,7 @@ class NotImporterChecker(QThread):
 
         # ninjaide = IDE.get_service('ide')
         # self.connect(ninjaide,
-        #             SIGNAL("ns_preferences_editor_checkStyle(PyQt_PyObject)"),
+        #             pyqtSignal("ns_preferences_editor_checkStyle(PyQt_PyObject)"),
         #             lambda: remove_pep8_checker())
         self.checkerCompleted.connect(self.refresh_display)
 

@@ -15,8 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with NINJA-IDE; If not, see <http://www.gnu.org/licenses/>.
 
-import os
-import sys
 from PyQt5.QtWidgets import (
     QWidget,
     QVBoxLayout,
@@ -27,24 +25,17 @@ from PyQt5.QtWidgets import (
     QGroupBox,
     QLabel,
     QCheckBox,
-    QLineEdit,
-    QCompleter,
-    QRadioButton,
-    QButtonGroup,
     QPushButton,
-    QDirModel,
-    QCompleter,
     QComboBox
 )
 from PyQt5.QtCore import (
-    QDir,
     pyqtSlot
 )
 from ninja_ide.gui.ide import IDE
 from ninja_ide.gui.dialogs.preferences import preferences
 from ninja_ide import translations
 from ninja_ide.core import settings
-from ninja_ide.tools import utils
+from ninja_ide.utils import utils
 
 
 class GeneralExecution(QWidget):
@@ -208,21 +199,21 @@ preferences.Preferences.register_configuration(
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from PyQt4.QtGui import QWidget
-from PyQt4.QtGui import QVBoxLayout
-from PyQt4.QtGui import QGroupBox
-from PyQt4.QtGui import QCheckBox
-from PyQt4.QtGui import QHBoxLayout
-from PyQt4.QtGui import QFileDialog
-from PyQt4.QtGui import QLineEdit
-from PyQt4.QtGui import QPushButton
-from PyQt4.QtGui import QLabel
-from PyQt4.QtGui import QComboBox
-from PyQt4.QtGui import QIcon
-from PyQt4.QtGui import QCompleter
-from PyQt4.QtGui import QDirModel
-from PyQt4.QtCore import SIGNAL
-from PyQt4.QtCore import QDir
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QVBoxLayout
+from PyQt5.QtWidgets import QGroupBox
+from PyQt5.QtWidgets import QCheckBox
+from PyQt5.QtWidgets import QHBoxLayout
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QLineEdit
+from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QComboBox
+from PyQt5.QtWidgets import QIcon
+from PyQt5.QtWidgets import QCompleter
+from PyQt5.QtWidgets import QDirModel
+from PyQt5.QtCore import SIGNAL
+from PyQt5.QtCore import QDir
 
 from ninja_ide import translations
 from ninja_ide.core import settings

@@ -15,18 +15,18 @@
 # You should have received a copy of the GNU General Public License
 # along with NINJA-IDE; If not, see <http://www.gnu.org/licenses/>.
 
-from PyQt4.QtCore import Qt
-from PyQt4.QtCore import QRectF
-from PyQt4.QtGui import QGraphicsItem
-from PyQt4.QtGui import QRadialGradient
-from PyQt4.QtGui import QGraphicsTextItem
-from PyQt4.QtGui import QStyle
-from PyQt4.QtGui import QColor
-from PyQt4.QtGui import QPen
-from PyQt4.QtGui import QWidget
-from PyQt4.QtGui import QGraphicsView
-from PyQt4.QtGui import QGraphicsScene
-from PyQt4.QtGui import QVBoxLayout
+from PyQt5.QtCore import Qt
+from PyQt5.QtCore import QRectF
+from PyQt5.QtWidgets import QGraphicsItem
+from PyQt5.QtWidgets import QRadialGradient
+from PyQt5.QtWidgets import QGraphicsTextItem
+from PyQt5.QtWidgets import QStyle
+from PyQt5.QtWidgets import QColor
+from PyQt5.QtWidgets import QPen
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QGraphicsView
+from PyQt5.QtWidgets import QGraphicsScene
+from PyQt5.QtWidgets import QVBoxLayout
 
 from ninja_ide.gui.main_panel import itab_item
 from ninja_ide.tools import introspection

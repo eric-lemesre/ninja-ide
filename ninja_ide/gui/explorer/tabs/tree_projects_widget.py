@@ -28,7 +28,6 @@ from PyQt5.QtWidgets import QVBoxLayout
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtWidgets import QInputDialog
 from PyQt5.QtWidgets import QStyle
-from PyQt5.QtWidgets import QStyledItemDelegate
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QMenu
 from PyQt5.QtWidgets import QHeaderView
@@ -47,7 +46,7 @@ from ninja_ide import translations
 from ninja_ide.core import settings
 from ninja_ide.core.file_handling import file_manager
 from ninja_ide.tools import ui_tools
-from ninja_ide.tools import utils
+from ninja_ide.utils import utils
 from ninja_ide.tools import json_manager
 from ninja_ide.gui.ide import IDE
 from ninja_ide.gui.dialogs import add_to_project

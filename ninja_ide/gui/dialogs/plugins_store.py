@@ -18,12 +18,12 @@
 import collections
 import random
 
-from PyQt4.QtGui import QDialog
-from PyQt4.QtGui import QVBoxLayout
-from PyQt4.QtGui import QColor
-from PyQt4.QtDeclarative import QDeclarativeView
-from PyQt4.QtCore import Qt
-from PyQt4.QtCore import SIGNAL
+from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QVBoxLayout
+from PyQt5.QtWidgets import QColor
+from PyQt5.QtDeclarative import QDeclarativeView
+from PyQt5.QtCore import Qt
+from PyQt5.QtCore import pyqtSignal
 
 from ninja_ide import translations
 from ninja_ide.tools import ui_tools
@@ -57,26 +57,26 @@ class PluginsStore(QDialog):
         self._search = []
         self.status = None
 
-        self.connect(self.root, SIGNAL("loadPluginsGrid()"),
+        self.connect(self.root, pyqtSignal("loadPluginsGrid()"),
                      self._load_by_name)
-        self.connect(self.root, SIGNAL("close()"),
+        self.connect(self.root, pyqtSignal("close()"),
                      self.close)
-        self.connect(self.root, SIGNAL("showPluginDetails(int)"),
+        self.connect(self.root, pyqtSignal("showPluginDetails(int)"),
                      self.show_plugin_details)
-        self.connect(self.root, SIGNAL("loadTagsGrid()"),
+        self.connect(self.root, pyqtSignal("loadTagsGrid()"),
                      self._load_tags_grid)
-        self.connect(self.root, SIGNAL("loadAuthorGrid()"),
+        self.connect(self.root, pyqtSignal("loadAuthorGrid()"),
                      self._load_author_grid)
-        self.connect(self.root, SIGNAL("search(QString)"),
+        self.connect(self.root, pyqtSignal("search(QString)"),
                      self._load_search_results)
-        self.connect(self.root, SIGNAL("loadPluginsForCategory(QString)"),
+        self.connect(self.root, pyqtSignal("loadPluginsForCategory(QString)"),
                      self._load_plugins_for_category)
-        self.connect(self, SIGNAL("processCompleted(PyQt_PyObject)"),
+        self.connect(self, pyqtSignal("processCompleted(PyQt_PyObject)"),
                      self._process_complete)
 
         self.nenv = nenvironment.NenvEggSearcher()
         self.connect(self.nenv,
-                     SIGNAL("searchCompleted(PyQt_PyObject)"),
+                     pyqtSignal("searchCompleted(PyQt_PyObject)"),
                      self.callback)
         self.status = self.nenv.do_search()
 
@@ -113,7 +113,7 @@ class PluginsStore(QDialog):
 
         if plugin.shallow:
             self.connect(plugin,
-                         SIGNAL("pluginMetadataInflated(PyQt_PyObject)"),
+                         pyqtSignal("pluginMetadataInflated(PyQt_PyObject)"),
                          self._update_content)
             self._plugins_inflate.append(plugin.inflate())
         else:
@@ -147,7 +147,7 @@ class PluginsStore(QDialog):
         plugin = self._inflating_plugins.pop()
         if plugin.shallow:
             self.connect(plugin,
-                         SIGNAL("pluginMetadataInflated(PyQt_PyObject)"),
+                         pyqtSignal("pluginMetadataInflated(PyQt_PyObject)"),
                          self._update_content)
             self._plugins_inflate.append(plugin.inflate())
         else:
@@ -202,7 +202,7 @@ class PluginsStore(QDialog):
         if plugin not in plugins:
             plugins.append(plugin)
             self._plugins_by_author[plugin.author] = plugins
-        self.emit(SIGNAL("processCompleted(PyQt_PyObject)"), plugin)
+        self.emit(pyqtSignal("processCompleted(PyQt_PyObject)"), plugin)
 
     def _get_random_color(self, mix=None):
         red = random.randint(0, 256)
