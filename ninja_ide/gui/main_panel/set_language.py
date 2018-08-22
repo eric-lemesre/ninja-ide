@@ -19,7 +19,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 
 from ninja_ide.gui.ide import IDE
-from ninja_ide.gui.editor import syntaxhighlighter as SH
+from ninja_ide.gui.editor import syntax_highlighter as SH
 
 
 class SetLanguageFile(object):
