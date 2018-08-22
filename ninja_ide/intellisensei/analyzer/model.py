@@ -25,7 +25,7 @@ late_resolution = 0
 def filter_data_type(data_types):
     occurrences = {}
     for type_ in data_types:
-        if isinstance(type_, basestring):
+        if isinstance(type_, str):
             item = occurrences.get(type_, [0, type_])
             item[0] += 1
             occurrences[type_] = item
@@ -201,7 +201,7 @@ class Module(Structure):
             if value is not None and value.__class__ is not Clazz:
                 data_type = value.get_data_type()
                 result['found'], result['type'] = True, data_type
-                if child_attrs or (isinstance(data_type, basestring) and
+                if child_attrs or (isinstance(data_type, str) and
                    data_type.endswith(main_attr)):
                     result['main_attr_replace'] = True
             elif value.__class__ is Clazz:
@@ -268,7 +268,7 @@ class Module(Structure):
             items = data_type.get_completion_items()
             result['found'], result['type'] = False, items
             result['object'] = data_type
-        elif isinstance(data_type, basestring):
+        elif isinstance(data_type, str):
             result['found'], result['type'] = True, data_type
             result['object'] = data_type
         return result
