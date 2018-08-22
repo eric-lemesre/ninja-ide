@@ -18,19 +18,14 @@
 
 from __future__ import absolute_import
 
-from PyQt5.QtWidgets import QVBoxLayout
-from PyQt5.QtWidgets import QHBoxLayout
-from PyQt5.QtWidgets import QPushButton
-from PyQt5.QtWidgets import QTreeWidget
-from PyQt5.QtWidgets import QTreeWidgetItem
-from PyQt5.QtWidgets import QDialog
-from PyQt5.QtWidgets import QWidget
-from PyQt5.QtWidgets import QLabel
-from PyQt5.QtWidgets import QLineEdit
-from PyQt5.QtWidgets import QKeySequence
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import (
+    QVBoxLayout, QHBoxLayout, QPushButton, QTreeWidget,
+    QTreeWidgetItem, QDialog, QWidget, QLabel, QLineEdit,
+    QMessageBox
+)
+from PyQt5.QtGui import QKeySequence
 
-from PyQt5.QtCore import SIGNAL
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtCore import Qt
 from PyQt5.QtCore import QEvent
 
@@ -83,14 +78,14 @@ class ShortcutDialog(QDialog):
         main_vbox.addLayout(buttons_layout)
         self.line_edit.installEventFilter(self)
         #buttons signals
-        self.connect(ok_button, SIGNAL("clicked()"), self.save_shortcut)
-        self.connect(cancel_button, SIGNAL("clicked()"), self.close)
+        self.connect(ok_button, pyqtSignal("clicked()"), self.save_shortcut)
+        self.connect(cancel_button, pyqtSignal("clicked()"), self.close)
 
     def save_shortcut(self):
         """Save a new Shortcut"""
         self.hide()
         shortcut = QKeySequence(self.line_edit.text())
-        self.emit(SIGNAL('shortcutChanged'), shortcut)
+        self.emit(pyqtSignal('shortcutChanged'), shortcut)
 
     def set_shortcut(self, txt):
         """Setup a shortcut"""
@@ -235,16 +230,16 @@ class ShortcutConfiguration(QWidget):
         #signals
         #open the set shortcut dialog
         self.connect(self.result_widget,
-            SIGNAL("itemDoubleClicked(QTreeWidgetItem*, int)"),
+            pyqtSignal("itemDoubleClicked(QTreeWidgetItem*, int)"),
                 self._open_shortcut_dialog)
         #load defaults shortcuts
-        self.connect(load_defaults_button, SIGNAL("clicked()"),
+        self.connect(load_defaults_button, pyqtSignal("clicked()"),
             self._load_defaults_shortcuts)
         #one shortcut has changed
-        self.connect(self.shortcut_dialog, SIGNAL('shortcutChanged'),
+        self.connect(self.shortcut_dialog, pyqtSignal('shortcutChanged'),
                      self._shortcut_changed)
 
-        self.connect(self._preferences, SIGNAL("savePreferences()"), self.save)
+        self.connect(self._preferences, pyqtSignal("savePreferences()"), self.save)
 
     def _shortcut_changed(self, keysequence):
         """

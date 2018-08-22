@@ -22,7 +22,7 @@ from __future__ import unicode_literals
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QVBoxLayout
 from PyQt5.QtWidgets import QLabel
-from PyQt5.QtCore import SIGNAL
+from PyQt5.QtCore import pyqtSignal
 
 from ninja_ide import translations
 from ninja_ide.gui.dialogs.preferences import preferences
@@ -37,7 +37,7 @@ class Plugins(QWidget):
         label = QLabel(translations.TR_PREFERENCES_PLUGINS_MAIN)
         vbox.addWidget(label)
 
-        self.connect(self._preferences, SIGNAL("savePreferences()"), self.save)
+        self.connect(self._preferences, pyqtSignal("savePreferences()"), self.save)
 
     def save(self):
         pass

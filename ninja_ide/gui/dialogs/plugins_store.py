@@ -20,8 +20,8 @@ import random
 
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QVBoxLayout
-from PyQt5.QtWidgets import QColor
-from PyQt5.QtDeclarative import QDeclarativeView
+from PyQt5.QtGui import QColor
+from PyQt5.QtQuick import QQuickView
 from PyQt5.QtCore import Qt
 from PyQt5.QtCore import pyqtSignal
 
@@ -38,10 +38,10 @@ class PluginsStore(QDialog):
         vbox = QVBoxLayout(self)
         vbox.setContentsMargins(0, 0, 0, 0)
         vbox.setSpacing(0)
-        self.view = QDeclarativeView()
+        self.view = QQuickView()
         self.view.setMinimumWidth(800)
         self.view.setMinimumHeight(600)
-        self.view.setResizeMode(QDeclarativeView.SizeRootObjectToView)
+        self.view.setResizeMode(QQuickView.SizeRootObjectToView)
         self.view.setSource(ui_tools.get_qml_resource("PluginsStore.qml"))
         self.root = self.view.rootObject()
         vbox.addWidget(self.view)

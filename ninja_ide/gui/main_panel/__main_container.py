@@ -53,7 +53,7 @@ from ninja_ide.gui.main_panel import add_file_folder
 from ninja_ide.gui.main_panel import image_viewer
 from ninja_ide.gui.main_panel import combo_editor
 from ninja_ide.gui.main_panel.helpers import split_orientation
-# from ninja_ide.gui.dialogs import from_import_dialog
+from ninja_ide.gui.dialogs import from_import_dialog
 from ninja_ide.tools.locator import (
     # locator,
     locator_widget
@@ -69,7 +69,7 @@ logger = NinjaLogger('ninja_ide.gui.main_panel.main_container')
 class _MainContainer(QWidget):
 
 ###############################################################################
-# MainContainer SIGNALS
+# MainContainer pyqtSignalS
 ###############################################################################
     """
     newFileOpened(QString)
@@ -238,13 +238,13 @@ class _MainContainer(QWidget):
         self.stack.removeWidget(widget)
 
     def _close_dialog(self, widget):
-        self.emit(SIGNAL("closeDialog(PyQt_PyObject)"), widget)
-        self.disconnect(widget, SIGNAL("finished(int)"),
+        self.emit(pyqtSignal("closeDialog(PyQt_PyObject)"), widget)
+        self.disconnect(widget, pyqtSignal("finished(int)"),
                         lambda: self._close_dialog(widget))
 
     def show_dialog(self, widget):
         self._opening_dialog = True
-        # self.connect(widget, SIGNAL("finished(int)"),
+        # self.connect(widget, pyqtSignal("finished(int)"),
         #             lambda: self._close_dialog(widget))
         self.setVisible(True)
         self.stack.addWidget(widget)
@@ -346,13 +346,13 @@ class _MainContainer(QWidget):
         self._locator.navigate_to(function, filePath, isVariable)
 
     def run_file(self, path):
-        self.emit(SIGNAL("runFile(QString)"), path)
+        self.emit(pyqtSignal("runFile(QString)"), path)
 
     def _add_to_project(self, path):
-        self.emit(SIGNAL("addToProject(QString)"), path)
+        self.emit(pyqtSignal("addToProject(QString)"), path)
 
     def _show_file_in_explorer(self, path):
-        self.emit(SIGNAL("showFileInExplorer(QString)"), path)
+        self.emit(pyqtSignal("showFileInExplorer(QString)"), path)
 
     def paste_history(self):
         """Paste the text from the copy/paste history."""
@@ -528,12 +528,12 @@ class _MainContainer(QWidget):
             resume = self.tr("Lines code: %s\n") % (block_count - blanks_count)
             resume += (self.tr("Blanks and commented lines: %s\n\n") %
                        blanks_count)
-            resume += self.tr("Total lines: %s") % blockdget
-            msgBox.exec_()
+            resume += self.tr("Total lines: %s") % block_count
 
             msgBox = QMessageBox(QMessageBox.Information,
                                  self.tr("Summary of lines"), resume,
                                  QMessageBox.Ok, editorWidget)
+            msgBox.exec_()
 
     def editor_cut(self):
         editorWidget = self.get_current_editor()
@@ -708,7 +708,7 @@ class _MainContainer(QWidget):
             editor_widget.reset_zoom()
 
     def recent_files_changed(self):
-        self.emit(SIGNAL("recentTabsModified()"))
+        self.emit(pyqtSignal("recentTabsModified()"))
 
     def dragEnterEvent(self, event):
         if event.mimeData().hasUrls():
@@ -771,20 +771,20 @@ class _MainContainer(QWidget):
         neditor.destroyed.connect(self._editor_destroyed)
         editable.fileSaved.connect(self._editor_tab_was_saved)
         neditor.addBackItemNavigation.connect(self.add_back_item_navigation)
-        # self.connect(editable, SIGNAL("fileSaved(PyQt_PyObject)"),
+        # self.connect(editable, pyqtSignal("fileSaved(PyQt_PyObject)"),
         #             self._editor_tab_was_saved)
         # editorWidget.font_changed.connect(self.show_zoom_indicator)
-        # self.connect(editorWidget, SIGNAL("openDropFile(QString)"),
+        # self.connect(editorWidget, pyqtSignal("openDropFile(QString)"),
         #             self.open_file)
-        # self.connect(editorWidget, SIGNAL("addBackItemNavigation()"),
+        # self.connect(editorWidget, pyqtSignal("addBackItemNavigation()"),
         #             self.add_back_item_navigation)
         # self.connect(editorWidget,
-        #             SIGNAL("locateFunction(QString, QString, bool)"),
+        #             pyqtSignal("locateFunction(QString, QString, bool)"),
         #             self._editor_locate_function)
-        # self.connect(editorWidget, SIGNAL("findOcurrences(QString)"),
+        # self.connect(editorWidget, pyqtSignal("findOcurrences(QString)"),
         #             self._find_occurrences)
         # keyPressEventSignal for plugins
-        # self.connect(editorWidget, SIGNAL("keyPressEvent(QEvent)"),
+        # self.connect(editorWidget, pyqtSignal("keyPressEvent(QEvent)"),
         #             self._editor_keyPressEvent)
 
         return neditor
@@ -826,18 +826,18 @@ class _MainContainer(QWidget):
                                            "Zoom: {0}%".format(text))
 
     def _find_occurrences(self, word):
-        self.emit(SIGNAL("findOcurrences(QString)"), word)
+        self.emit(pyqtSignal("findOcurrences(QString)"), word)
 
     def _editor_keyPressEvent(self, event):
-        self.emit(SIGNAL("editorKeyPressEvent(QEvent)"), event)
+        self.emit(pyqtSignal("editorKeyPressEvent(QEvent)"), event)
 
     def _editor_locate_function(self, function, filePath, isVariable):
-        self.emit(SIGNAL("locateFunction(QString, QString, bool)"),
+        self.emit(pyqtSignal("locateFunction(QString, QString, bool)"),
                   function, filePath, isVariable)
 
     def _editor_tab_was_saved(self, editable=None):
         self.updateLocator.emit(editable.file_path)
-        # self.emit(SIGNAL("updateLocator(QString)"), editable.file_path)
+        # self.emit(pyqtSignal("updateLocator(QString)"), editable.file_path)
 
     def get_current_widget(self):
         return self.current_widget.currentWidget()
@@ -936,7 +936,7 @@ class _MainContainer(QWidget):
         #if self.tabs.is_open(filename) != -1:
             #self.tabs.move_to_open(filename)
         #self.tabs.currentWidget().setFocus()
-        #self.emit(SIGNAL("currentEditorChanged(QString)"), filename)
+        #self.emit(pyqtSignal("currentEditorChanged(QString)"), filename)
 
     def get_widget_for_id(self, filename):
         pass
@@ -1115,10 +1115,10 @@ class _MainContainer(QWidget):
             self.stack.setCurrentIndex(0)
         else:
             startPage = start_page.StartPage(parent=self)
-            # self.connect(startPage, SIGNAL("openProject(QString)"),
+            # self.connect(startPage, pyqtSignal("openProject(QString)"),
             #             self.open_project)
-            # self.connect(startPage, SIGNAL("openPreferences()"),
-            #             lambda: self.emit(SIGNAL("openPreferences()")))
+            # self.connect(startPage, pyqtSignal("openPreferences()"),
+            #             lambda: self.emit(pyqtSignal("openPreferences()")))
             # Connections
             startPage.newFile.connect(self.add_editor)
             self.stack.insertWidget(0, startPage)
@@ -1187,7 +1187,7 @@ class _MainContainer(QWidget):
                 #widget._update_margin_line()
 
     def open_project(self, path):
-        self.emit(SIGNAL("openProject(QString)"), path)
+        self.emit(pyqtSignal("openProject(QString)"), path)
 
     def close_python_doc(self):
         pass

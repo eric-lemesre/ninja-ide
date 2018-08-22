@@ -27,7 +27,7 @@ from PyQt5.QtWidgets import QSizePolicy
 from PyQt5.QtCore import QSettings
 from PyQt5.QtCore import Qt
 from PyQt5.QtCore import QSize
-from PyQt5.QtCore import SIGNAL
+from PyQt5.QtCore import pyqtSignal
 
 from ninja_ide import resources
 from ninja_ide.core import settings
@@ -59,8 +59,8 @@ class PythonDetectDialog(QDialog):
         hbox.addWidget(btnAccept)
         vbox.addLayout(hbox)
 
-        self.connect(btnAccept, SIGNAL("clicked()"), self._set_python_path)
-        self.connect(btnCancel, SIGNAL("clicked()"), self.close)
+        self.connect(btnAccept, pyqtSignal("clicked()"), self._set_python_path)
+        self.connect(btnCancel, pyqtSignal("clicked()"), self.close)
 
         for path in suggested:
             self.listPaths.addItem(path)

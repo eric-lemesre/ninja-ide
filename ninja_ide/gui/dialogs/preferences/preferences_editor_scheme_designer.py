@@ -33,11 +33,11 @@ from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtWidgets import QLabel
-from PyQt5.QtWidgets import QColor
+from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QColorDialog
 from PyQt5.QtWidgets import QGroupBox
 from PyQt5.QtCore import Qt
-from PyQt5.QtCore import SIGNAL
+from PyQt5.QtCore import pyqtSignal
 
 from ninja_ide import translations
 from ninja_ide import resources
@@ -71,7 +71,7 @@ class EditorSchemeDesigner(QDialog):
         self.line_name.setPlaceholderText(getuser().capitalize() + "s_scheme")
         group0_hbox.addWidget(self.line_name)
         group0_hbox.addWidget(btnSave)
-        self.connect(btnSave, SIGNAL("clicked()"), self.save_scheme)
+        self.connect(btnSave, pyqtSignal("clicked()"), self.save_scheme)
         _demo = "<center>" + ascii_letters  # demo text for preview
         self.preview_label1, self.preview_label2 = QLabel(_demo), QLabel(_demo)
         group2_vbox.addWidget(self.preview_label1)
@@ -113,12 +113,12 @@ class EditorSchemeDesigner(QDialog):
             self.apply_button_style(btn, scheme[key])
             self._grid.addWidget(btn, row, 2)
 
-            self.connect(text, SIGNAL("textChanged(QString)"),
+            self.connect(text, pyqtSignal("textChanged(QString)"),
                          lambda: self.apply_button_style(btn, text.text()))
-            self.connect(btn, SIGNAL("clicked()"),
+            self.connect(btn, pyqtSignal("clicked()"),
                          lambda: self._pick_color(text, btn))
         else:
-            self.connect(text, SIGNAL("textChanged(QString)"),
+            self.connect(text, pyqtSignal("textChanged(QString)"),
                          self._preview_style)
         self._components[key] = (text, isnum)
 

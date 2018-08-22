@@ -20,13 +20,11 @@ import math
 import re
 
 from PyQt5.QtWidgets import QWidget
-from PyQt5.QtWidgets import QBrush
-from PyQt5.QtWidgets import QLinearGradient
-from PyQt5.QtWidgets import QPixmap
-from PyQt5.QtWidgets import QColor
-from PyQt5.QtWidgets import QPolygonF
-from PyQt5.QtWidgets import QFontMetrics
-from PyQt5.QtWidgets import QPainter
+from PyQt5.QtGui import (
+    QBrush, QLinearGradient, QPixmap,
+    QColor, QPolygonF, QFontMetrics,
+    QPainter
+)
 from PyQt5.QtCore import Qt
 from PyQt5.QtCore import QPointF
 

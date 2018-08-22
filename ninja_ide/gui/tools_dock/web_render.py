@@ -20,9 +20,10 @@ from tempfile import mkdtemp
 
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QVBoxLayout
-from PyQt5.QtWebKit import QWebView
-from PyQt5.QtCore import QUrl
+from PyQt5.QtWebKitWidgets import QWebView
 from PyQt5.QtWebKit import QWebSettings
+from PyQt5.QtCore import QUrl
+
 
 
 class WebRender(QWidget):

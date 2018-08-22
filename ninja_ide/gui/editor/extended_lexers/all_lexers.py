@@ -20,7 +20,7 @@ from __future__ import absolute_import
 
 import re
 
-from PyQt5.QtWidgets import QColor
+from PyQt5.QtGui import QColor
 
 from ninja_ide import resources
 from ninja_ide.core import settings

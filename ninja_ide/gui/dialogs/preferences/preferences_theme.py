@@ -19,16 +19,12 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from PyQt5.QtWidgets import QWidget
-from PyQt5.QtWidgets import QVBoxLayout
-from PyQt5.QtWidgets import QHBoxLayout
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWidgets import QListWidget
-from PyQt5.QtWidgets import QLabel
-from PyQt5.QtWidgets import QSizePolicy
-from PyQt5.QtWidgets import QSpacerItem
-from PyQt5.QtWidgets import QPushButton
-from PyQt5.QtCore import SIGNAL
+from PyQt5.QtWidgets import (
+    QWidget, QVBoxLayout, QHBoxLayout, QApplication,
+    QListWidget, QLabel, QSizePolicy, QSpacerItem,
+    QPushButton
+)
+from PyQt5.QtCore import pyqtSignal
 
 from ninja_ide import resources
 from ninja_ide import translations
@@ -61,11 +57,11 @@ class Theme(QWidget):
         vbox.addLayout(hbox)
         self._refresh_list()
 
-        self.connect(self.btn_preview, SIGNAL("clicked()"), self.preview_theme)
-        self.connect(self.btn_delete, SIGNAL("clicked()"), self.delete_theme)
-        self.connect(self.btn_create, SIGNAL("clicked()"), self.create_theme)
+        self.connect(self.btn_preview, pyqtSignal("clicked()"), self.preview_theme)
+        self.connect(self.btn_delete, pyqtSignal("clicked()"), self.delete_theme)
+        self.connect(self.btn_create, pyqtSignal("clicked()"), self.create_theme)
 
-        self.connect(self._preferences, SIGNAL("savePreferences()"), self.save)
+        self.connect(self._preferences, pyqtSignal("savePreferences()"), self.save)
 
     def delete_theme(self):
         if self.list_skins.currentRow() != 0:

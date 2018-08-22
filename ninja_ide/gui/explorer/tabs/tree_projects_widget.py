@@ -131,11 +131,11 @@ class ProjectTreeColumn(QDialog):
         # FIXME: Should have a ninja settings object that stores tree state
         # FIXME: Or bettter, application data object
         # TODO: check this:
-        # self.connect(ide, SIGNAL("goingDown()"),
+        # self.connect(ide, pyqtSignal("goingDown()"),
         #    self.tree_projects.shutdown)
 
         # def close_project_signal():
-        #    self.emit(SIGNAL("updateLocator()"))
+        #    self.emit(pyqtSignal("updateLocator()"))
 
     def install_tab(self):
         ide = IDE.get_service('ide')
@@ -443,12 +443,12 @@ class ProjectTreeColumn(QDialog):
         # if self.current_tree._added_to_console:
         #    actionRemoveFromConsole = menu.addAction(
         #        translations.TR_REMOVE_PROJECT_FROM_PYTHON_CONSOLE)
-        #    self.connect(actionRemoveFromConsole, SIGNAL("triggered()"),
+        #    self.connect(actionRemoveFromConsole, pyqtSignal("triggered()"),
         #                 self.current_tree._remove_project_from_console)
         # else:
         #    actionAdd2Console = menu.addAction(
         #        translations.TR_ADD_PROJECT_TO_PYTHON_CONSOLE)
-        #    self.connect(actionAdd2Console, SIGNAL("triggered()"),
+        #    self.connect(actionAdd2Console, pyqtSignal("triggered()"),
         #                 self.current_tree._add_project_to_console)
 
 
@@ -580,13 +580,13 @@ class TreeProjectsWidget(QTreeView):
         action_add_folder.triggered.connect(self._add_new_folder)
         action_remove_folder.triggered.connect(self._delete_folder)
         action_create_init.triggered.connect(self._create_init)
-        # self.connect(action_add_file, SIGNAL("triggered()"),
+        # self.connect(action_add_file, pyqtSignal("triggered()"),
         #             self._add_new_file)
-        # self.connect(action_add_folder, SIGNAL("triggered()"),
+        # self.connect(action_add_folder, pyqtSignal("triggered()"),
         #             self._add_new_folder)
-        # self.connect(action_create_init, SIGNAL("triggered()"),
+        # self.connect(action_create_init, pyqtSignal("triggered()"),
         #             self._create_init)
-        # self.connect(action_remove_folder, SIGNAL("triggered()"),
+        # self.connect(action_remove_folder, pyqtSignal("triggered()"),
         #             self._delete_folder)
 
     def _add_context_menu_for_files(self, menu, lang):
@@ -599,23 +599,23 @@ class TreeProjectsWidget(QTreeView):
             translations.TR_DELETE_FILE)
 
         # Connect actions
-        # self.connect(action_remove_file, SIGNAL("triggered()"),
+        # self.connect(action_remove_file, pyqtSignal("triggered()"),
         #             self._delete_file)
         action_remove_file.triggered.connect(self._delete_file)
         action_rename_file.triggered.connect(self._rename_file)
         action_copy_file.triggered.connect(self._copy_file)
         action_move_file.triggered.connect(self._move_file)
-        # self.connect(action_rename_file, SIGNAL("triggered()"),
+        # self.connect(action_rename_file, pyqtSignal("triggered()"),
         #             self._rename_file)
-        # self.connect(action_copy_file, SIGNAL("triggered()"),
+        # self.connect(action_copy_file, pyqtSignal("triggered()"),
         #             self._copy_file)
-        # self.connect(action_move_file, SIGNAL("triggered()"),
+        # self.connect(action_move_file, pyqtSignal("triggered()"),
         #             self._move_file)
 
         # Allow to edit Qt UI files with the appropiate program
         if lang == 'ui':
             action_edit_ui_file = menu.addAction(translations.TR_EDIT_UI_FILE)
-            self.connect(action_edit_ui_file, SIGNAL("triggered()"),
+            self.connect(action_edit_ui_file, pyqtSignal("triggered()"),
                          self._edit_ui_file)
 
         # Menu for files

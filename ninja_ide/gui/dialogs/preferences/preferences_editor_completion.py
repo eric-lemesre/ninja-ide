@@ -25,9 +25,9 @@ from PyQt5.QtWidgets import QCheckBox
 from PyQt5.QtWidgets import QGridLayout
 from PyQt5.QtWidgets import QSpacerItem
 from PyQt5.QtWidgets import QSizePolicy
-from PyQt5.QtWidgets import QKeySequence
+from PyQt5.QtGui import QKeySequence
 from PyQt5.QtCore import Qt
-from PyQt5.QtCore import SIGNAL
+from PyQt5.QtCore import pyqtSignal
 
 from ninja_ide import translations
 from ninja_ide import resources
@@ -90,7 +90,7 @@ class EditorCompletion(QWidget):
         vbox.addItem(QSpacerItem(0, 10, QSizePolicy.Expanding,
             QSizePolicy.Expanding))
 
-        self.connect(self._preferences, SIGNAL("savePreferences()"), self.save)
+        self.connect(self._preferences, pyqtSignal("savePreferences()"), self.save)
 
     def save(self):
         qsettings = IDE.ninja_settings()

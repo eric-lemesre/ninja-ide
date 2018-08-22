@@ -21,19 +21,14 @@ from __future__ import unicode_literals
 
 from getpass import getuser
 
-from PyQt5.QtWidgets import QDialog
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWidgets import QVBoxLayout
-from PyQt5.QtWidgets import QHBoxLayout
-from PyQt5.QtWidgets import QPushButton
-from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtWidgets import QLineEdit
-from PyQt5.QtWidgets import QGroupBox
-from PyQt5.QtWidgets import QSizePolicy
-from PyQt5.QtWidgets import QSpacerItem
-from PyQt5.QtWidgets import QPlainTextEdit
+from PyQt5.QtWidgets import (
+    QDialog, QApplication, QVBoxLayout,
+    QHBoxLayout, QPushButton, QMessageBox,
+    QLineEdit, QGroupBox, QSizePolicy,
+    QSpacerItem, QPlainTextEdit
+)
 from PyQt5.QtCore import Qt
-from PyQt5.QtCore import SIGNAL
+from PyQt5.QtCore import pyqtSignal
 
 from ninja_ide import translations
 from ninja_ide import resources
@@ -82,8 +77,8 @@ class ThemeEditor(QDialog):
         vbox.addLayout(hbox)
         vbox.addLayout(hbox2)
 
-        self.connect(self.btn_apply, SIGNAL("clicked()"), self.apply_stylesheet)
-        self.connect(self.btn_save, SIGNAL("clicked()"), self.save_stylesheet)
+        self.connect(self.btn_apply, pyqtSignal("clicked()"), self.apply_stylesheet)
+        self.connect(self.btn_save, pyqtSignal("clicked()"), self.save_stylesheet)
 
     def apply_stylesheet(self):
         qss = self.edit_qss.toPlainText()

@@ -24,7 +24,7 @@ from __future__ import unicode_literals
 
 import re
 
-from PyQt5.QtWidgets import (
+from PyQt5.QtGui import (
     QSyntaxHighlighter,
     QColor, QTextCharFormat, QTextBlockUserData, QFont, QBrush, QTextFormat)
 from PyQt5.QtCore import pyqtSignal
@@ -32,12 +32,12 @@ from PyQt5.QtCore import pyqtSignal
 from ninja_ide import resources
 from ninja_ide.core import settings
 
-
-try:
-    unicode
-except NameError:
-    # Python 3
-    basestring = unicode = str  # lint:ok
+# ninja-ide 3 don't work with Python 2
+#try:
+#    unicode
+#except NameError:
+#    # Python 3
+basestring = unicode = str  # lint:ok
 
 
 def get_user_data(block):
