@@ -3,7 +3,7 @@ ninja_ide/addins/plugins/*
 NINJA_IDE.egg-info/*
 build/*
 dist/*
-
+venv/*
 
 # OS generated files
 .DS_Store
@@ -23,6 +23,7 @@ Thumbs.db
 .coverage
 .project
 .python-version
+.idea/*
 
 # Misc
 *.swp
