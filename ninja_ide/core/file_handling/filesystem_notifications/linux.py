@@ -20,8 +20,14 @@ from __future__ import absolute_import
 import os
 
 from PyQt5.QtCore import QThread
-from pyinotify import ProcessEvent, IN_CREATE, IN_DELETE, IN_DELETE_SELF, \
-                        IN_MODIFY, WatchManager, Notifier, ExcludeFilter
+# after 0.71 IN_* and ALL_* are in EventsCodes
+from pyinotify import (
+    ProcessEvent,
+    EventsCodes,
+    WatchManager,
+    Notifier,
+    ExcludeFilter
+)
 
 from ninja_ide.tools.logger import NinjaLogger
 logger = NinjaLogger('ninja_ide.core.file_handling.filesystem_notifications.linux')
@@ -37,7 +43,7 @@ MODIFIED = base_watcher.MODIFIED
 #from ninja_ide.core.file_handling.filesystem_notifications.base_watcher import ADDED, \
 #                                            DELETED, REMOVE, RENAME, MODIFIED
 
-mask = IN_CREATE | IN_DELETE | IN_DELETE_SELF | IN_MODIFY
+mask = EventsCodes.IN_CREATE | EventsCodes.IN_DELETE | EventsCodes.IN_DELETE_SELF | EventsCodes.IN_MODIFY
 
 
 class NinjaProcessEvent(ProcessEvent):

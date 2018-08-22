@@ -1,2 +1,3 @@
 PyQt5==5.7.1
 QScintilla>=2.10.4
+pyinotify
