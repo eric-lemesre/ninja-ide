@@ -58,7 +58,8 @@ exec(compile(open(NINJA_ENV_ACTIVATE).read(), NINJA_ENV_ACTIVATE, 'exec'),
      dict(__file__=NINJA_ENV_ACTIVATE))
 
 ###############################################################################
-from pip import main as pipmain
+# pip.main() after 10.0.0 is not supported, replace by callable_pip
+import callable_pip as pipmain
 #lint:disable
 try:
     from pip.backwardcompat import xmlrpclib
